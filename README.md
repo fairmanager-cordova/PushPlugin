@@ -1,10 +1,10 @@
-# Cordova Push Notifications Plugin for Android, iOS, WP8 and Amazon Fire OS
+# Cordova Push Notifications Plugin for Android, iOS, BlackBerry10, WP8 and Amazon Fire OS
 
 ---
 
 ## DESCRIPTION
 
-This plugin is for use with [Cordova](http://cordova.apache.org/), and allows your application to receive push notifications on Amazon Fire OS, Android, iOS and WP8 devices. The Amazon Fire OS implementation uses [Amazon's ADM (Amazon Device Messaging) service](https://developer.amazon.com/sdk/adm.html), the Android implementation uses [Google's GCM (Google Cloud Messaging) service](http://developer.android.com/guide/google/gcm/index.html), whereas the iOS version is based on [Apple APNS Notifications](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html). The WP8 implementation is based on [MPNS](http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff402558(v=vs.105).aspx).
+This plugin is for use with [Cordova](http://cordova.apache.org/), and allows your application to receive push notifications on Amazon Fire OS, Android, iOS, Blackberry10 and WP8 devices. The Amazon Fire OS implementation uses [Amazon's ADM (Amazon Device Messaging) service](https://developer.amazon.com/sdk/adm.html), the Android implementation uses [Google's GCM (Google Cloud Messaging) service](http://developer.android.com/guide/google/gcm/index.html), whereas the iOS version is based on [Apple APNS Notifications](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html). The WP8 implementation is based on [MPNS](http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff402558(v=vs.105).aspx). The BlackBerry10 implementation uses [BlackBerry Push Service](https://developer.blackberry.com/devzone/develop/platform_services/push_service_overview.html).
 
 **Important** - Push notifications are intended for real devices. They are not tested for WP8 Emulator. The registration process will fail on the iOS simulator. Notifications can be made to work on the Android Emulator, however doing so requires installation of some helper libraries, as outlined [here,](http://www.androidhive.info/2012/10/android-push-notifications-using-google-cloud-messaging-gcm-php-and-mysql/) under the section titled "Installing helper libraries and setting up the Emulator".
 
@@ -268,7 +268,7 @@ The plugin is based on [plugman](https://github.com/apache/cordova-plugman) and 
 plugman install --platform [PLATFORM] --project [TARGET-PATH] --plugin [PLUGIN-PATH]
 
 where
-	[PLATFORM] = ios, amazon-fireos, android or wp8
+	[PLATFORM] = ios, amazon-fireos, android, blackberry10 or wp8
 	[TARGET-PATH] = path to folder containing your phonegap project
 	[PLUGIN-PATH] = path to folder containing this plugin
 ```
@@ -299,7 +299,6 @@ To be called as soon as the device becomes ready.
 ```js
 $("#app-status-ul").append('<li>registering ' + device.platform + '</li>');
 if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
-    
     pushNotification.register(
     successHandler,
     errorHandler,
@@ -307,6 +306,16 @@ if ( device.platform == 'android' || device.platform == 'Android' || device.plat
         "senderID":"replace_with_sender_id",
         "ecb":"onNotification"
     });
+} else if ( device.platform == 'blackberry10'){
+    pushNotification.register(
+    successHandler,
+    errorHandler,
+    {
+        invokeTargetId : "replace_with_invoke_target_id",
+        appId: "replace_with_app_id",
+        ppgUrl:"replace_with_ppg_url", //remove for BES pushes
+        ecb: "pushNotificationHandler"
+    }
 } else {
     pushNotification.register(
     tokenHandler,
@@ -320,13 +329,16 @@ if ( device.platform == 'android' || device.platform == 'Android' || device.plat
 }
 ```
 
-On success, you will get a call to tokenHandler (iOS), onNotification (Android and Amazon Fire OS), or onNotificationWP8 (WP8), allowing you to obtain the device token or registration ID, or push channel name and Uri respectively. Those values will typically get posted to your intermediary push server so it knows who it can send notifications to.
+On success, you will get a call to tokenHandler (iOS), onNotification (Android and Amazon Fire OS), onNotificationWP8 (WP8) or successHandler (Blackberry10), allowing you to obtain the device token or registration ID, or push channel name and Uri respectively. Those values will typically get posted to your intermediary push server so it knows who it can send notifications to.
 
 ***Note***
 
 - **Amazon Fire OS**:  "ecb" MUST be provided in order to get callback notifications. If you have not already registered with Amazon developer portal,you will have to obtain credentials and api_key for your app. This is described more in detail in the [Registering your app for Amazon Device Messaging (ADM)](#registering_for_adm) section below.
 
 - **Android**: If you have not already done so, you'll need to set up a Google API project, to generate your senderID. [Follow these steps](http://developer.android.com/guide/google/gcm/gs.html) to do so. This is described more fully in the **Testing** section below. In this example, be sure and substitute your own senderID. Get your senderID by signing into to your [google dashboard](https://code.google.com/apis/console/). The senderID is found at *Overview->Dashboard->Project Number*.
+
+- **BlackBerry10**: "ecb" MUST be provided to get notified of incoming push notifications. Also note, if doing a public consumer (BIS) push, you need to manually add the _sys_use_consumer_push permission to config.xml. `<rim:permit system="true">_sys_use_consumer_push</rim:permit>`. In order to receieve notifications, an invoke target must be [setup](http://developer.blackberry.com/html5/documentation/v2_1/rim_invoke-target.html) for push.
+
 
 
 
@@ -397,8 +409,8 @@ function onNotification(e) {
 		if ( e.foreground )
 		{
 			$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
-			
-			// on Android soundname is outside the payload. 
+
+			// on Android soundname is outside the payload.
 			// On Amazon FireOS all custom attributes are contained within payload
 			var soundfile = e.soundname || e.payload.sound;
 			// if the notification contains a soundname, play it.
@@ -434,6 +446,27 @@ function onNotification(e) {
   }
 }
 ```
+
+```js
+// BlackBerry10
+function pushNotificationHandler(pushpayload) {
+    var contentType = pushpayload.headers["Content-Type"],
+        id = pushpayload.id,
+        data = pushpayload.data;//blob
+
+    // If an acknowledgement of the push is required (that is, the push was sent as a confirmed push
+    // - which is equivalent terminology to the push being sent with application level reliability),
+    // then you must either accept the push or reject the push
+    if (pushpayload.isAcknowledgeRequired) {
+        // In our sample, we always accept the push, but situations might arise where an application
+        // might want to reject the push (for example, after looking at the headers that came with the push
+        // or the data of the push, we might decide that the push received did not match what we expected
+        // and so we might want to reject it)
+        pushpayload.acknowledge(true);
+    }
+};
+```
+
 Looking at the above message handling code for Android/Amazon Fire OS, a few things bear explanation. Your app may receive a notification while it is active (INLINE). If you background the app by hitting the Home button on your device, you may later receive a status bar notification. Selecting that notification from the status will bring your app to the front and allow you to process the notification (BACKGROUND). Finally, should you completely exit the app by hitting the back button from the home page, you may still receive a notification. Touching that notification in the notification tray will relaunch your app and allow you to process the notification (COLDSTART). In this case the **coldstart** flag will be set on the incoming event. You can look at the **foreground** flag on the event to determine whether you are processing a background or an in-line notification. You may choose, for example to play a sound or show a dialog only for inline or coldstart notifications since the user has already been alerted via the status bar.
 
 For Amazon Fire OS, offline message can also be received when app is launched via carousel or by tapping on app icon from apps. In either case once app delivers the offline message to JS, notification will be cleared.
@@ -695,6 +728,19 @@ You can see how to create one from MSDN Samples:
 - [Send Tile Notification (MSDN Sample)](http://msdn.microsoft.com/en-us/library/windowsphone/develop/hh202970(v=vs.105).aspx#BKMK_SendingaTileNotification)
 - [Send Raw Notification (MSDN Sample)](http://msdn.microsoft.com/en-us/library/windowsphone/develop/hh202977(v=vs.105).aspx#BKMK_RunningtheRawNotificationSample)
 
+
+### Sending push notifications on BlackBerry10
+If doing a BES push, ensure the device has been enterprise activated, has network access (wifi or sim) and your app is installed in the work permiter. You also need to make sure the _sys_use_consumer_push permission is NOT specified in the config.xml. This permission is meant only for public consumer BIS pushes and will cause an error when registering.
+
+If doing a public consumer BIS push, please ensure the _sys_use_consumer_push permission is added to the config.xml.
+
+Both types of pushes require the use of a Push Initiator.
+
+- [App based BIS Initiator](https://github.com/blackberry/BB10-WebWorks-Samples/tree/master/pushCaptureBasics/pushInitiator)
+- [Web based BIS Initiator (Push Service SDK)](https://developer.blackberry.com/services/push/)
+- [Web based BES Initiator](https://github.com/blackberry/BES10-WebWorks/tree/master/SimplePushTest/WW2.0/server)
+
+For additional information on BlackBerry Push see https://developer.blackberry.com/services/push/.
 
 ### Troubleshooting and next steps
 If all went well, you should see a notification show up on each device. If not, make sure you are not being blocked by a firewall, and that you have internet access. Check and recheck the token id, the registration ID and the certificate generating process.
