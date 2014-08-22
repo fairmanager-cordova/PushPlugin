@@ -226,6 +226,10 @@ module.exports = {
                 }
             });
         }
+    },
+    
+    inject: function(invokeRequest) {
+        onInvoked(invokeRequest);
     }
 }
 require("cordova/exec/proxy").add("PushPlugin", module.exports);
