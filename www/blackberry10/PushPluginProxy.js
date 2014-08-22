@@ -124,7 +124,7 @@ module.exports = {
             pushTransportReadyCallback = ops.pushTransportReadyCallback,
             launchApplicationOnPush = ops.launchApplicationOnPush;
 
-            ecb = ops.ecb,
+            ecb = ops.ecb;
 
         blackberry.push.PushService.create(ops, function(obj) {
             pushServiceObj = obj;
@@ -229,5 +229,5 @@ module.exports = {
             });
         }
     }
-}
+};
 require("cordova/exec/proxy").add("PushPlugin", module.exports);
