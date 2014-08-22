@@ -134,13 +134,15 @@ module.exports = {
 
             if (launchApplicationOnPush) {
                 pushServiceObj.launchApplicationOnPush(launchApplicationOnPush , function (result) {
-                    if (result == blackberry.push.PushService.INTERNAL_ERROR) {
-                        error("Error: An internal error occurred while calling launchApplicationOnPush.");
-                    } else if (result == blackberry.push.PushService.CREATE_SESSION_NOT_DONE) {
-                        error("Error: Called launchApplicationOnPush without an "
-                              + "existing session. It usually means a programming error.");
-                    } else {
-                        error("Error: Received error code (" + result + ") after calling launchApplicationOnPush.");
+                    if (result != blackberry.push.PushService.SUCCESS ) {
+                        if (result == blackberry.push.PushService.INTERNAL_ERROR) {
+                            error("Error: An internal error occurred while calling launchApplicationOnPush.");
+                        } else if (result == blackberry.push.PushService.CREATE_SESSION_NOT_DONE) {
+                            error("Error: Called launchApplicationOnPush without an "
+                                  + "existing session. It usually means a programming error.");
+                        } else {
+                            error("Error: Received error code (" + result + ") after calling launchApplicationOnPush.");
+                        }
                     }
                 });
             }
