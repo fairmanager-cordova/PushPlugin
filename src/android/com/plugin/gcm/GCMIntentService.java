@@ -9,6 +9,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -118,6 +120,14 @@ public class GCMIntentService extends GCMBaseIntentService {
 		String msgcnt = extras.getString("msgcnt");
 		if (msgcnt != null) {
 			mBuilder.setNumber(Integer.parseInt(msgcnt));
+		}
+		
+		String soundName = extras.getString("sound");
+		if (soundName != null) {
+			Resources r = getResources();
+			int resourceId = r.getIdentifier(soundName, "raw", context.getPackageName());
+			Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resourceId);
+			mBuilder.setSound(soundUri);
 		}
 		
 		int notId = 0;
