@@ -117,8 +117,8 @@ function onInvoked(invokeRequest) {
                         var decodedPayload = fileReaderEvent.target.result;
                         var payload = JSON.parse(decodedPayload);
                         // Check for a "sound" property, indicating the desire to play a custom notification sound.
-                        if (payload.sound && typeof Media !== "undefined") {
-                            var sound = new Media(payload.sound);
+                        if (payload.sound) {
+                            var sound = new Audio(payload.sound);
                             sound.play();
                         }
                     };
