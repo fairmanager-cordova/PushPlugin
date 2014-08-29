@@ -125,7 +125,7 @@ function onInvoked(invokeRequest) {
                     reader.readAsText(pushPayload.data, "UTF-8");
                 }
             } catch(e) {
-                // Do nothing.
+                console.error(e);
             } finally {
                 pushCallback = eval(ecb);
                 if (typeof pushCallback === "function") {
