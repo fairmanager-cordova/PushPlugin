@@ -106,11 +106,30 @@ function onInvoked(invokeRequest) {
 
     if (invokeRequest.action && invokeRequest.action == "bb.action.PUSH") {
         if (ecb) {
-            pushCallback = eval(ecb);
-
-            if (typeof pushCallback === "function") {
-                pushPayload = pushServiceObj.extractPushPayload(invokeRequest);
-                pushCallback(pushPayload);
+            pushPayload = pushServiceObj.extractPushPayload(invokeRequest);
+            
+            try {
+                // Only check for feature options in the payload if we're not in fullscreen.
+                if (blackberry.app.windowState !== "fullscreen") {
+                    // Attempt to decode the push payload.
+                    var reader = new FileReader();
+                    reader.onload = function(fileReaderEvent) {
+                        var decodedPayload = fileReaderEvent.target.result;
+                        // Check for a "sound" property, indicating the desire to play a custom notification sound.
+                        if (decodedPayload.sound && typeof Media !== "undefined") {
+                            var sound = new Media(decodedPayload.sound);
+                            sound.play();
+                        }
+                    };
+                    reader.readAsText(pushPayload, "UTF-8");
+                }
+            } catch(e) {
+                // Do nothing.
+            } finally {
+                pushCallback = eval(ecb);
+                if (typeof pushCallback === "function") {
+                    pushCallback(pushPayload);
+                }
             }
         }
     }
