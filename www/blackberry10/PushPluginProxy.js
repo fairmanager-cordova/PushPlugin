@@ -141,7 +141,7 @@ module.exports = {
         var ops = args[0],
             simChangeCallback = ops.simChangeCallback,
             pushTransportReadyCallback = ops.pushTransportReadyCallback,
-            launchApplicationOnPush = ops.launchApplicationOnPush;
+            launchApplicationOnPush = ops.launchApplicationOnPush !== undefined ? ops.launchApplicationOnPush : true;
 
             ecb = ops.ecb;
 
@@ -150,21 +150,18 @@ module.exports = {
 
             // Add an event listener to handle incoming invokes
             document.addEventListener("invoked", onInvoked, false);
-
-            if (launchApplicationOnPush) {
-                pushServiceObj.launchApplicationOnPush(launchApplicationOnPush , function (result) {
-                    if (result != blackberry.push.PushService.SUCCESS ) {
-                        if (result == blackberry.push.PushService.INTERNAL_ERROR) {
-                            error("Error: An internal error occurred while calling launchApplicationOnPush.");
-                        } else if (result == blackberry.push.PushService.CREATE_SESSION_NOT_DONE) {
-                            error("Error: Called launchApplicationOnPush without an "
-                                  + "existing session. It usually means a programming error.");
-                        } else {
-                            error("Error: Received error code (" + result + ") after calling launchApplicationOnPush.");
-                        }
+            pushServiceObj.launchApplicationOnPush(launchApplicationOnPush , function (result) {
+                if (result != blackberry.push.PushService.SUCCESS ) {
+                    if (result == blackberry.push.PushService.INTERNAL_ERROR) {
+                        error("Error: An internal error occurred while calling launchApplicationOnPush.");
+                    } else if (result == blackberry.push.PushService.CREATE_SESSION_NOT_DONE) {
+                        error("Error: Called launchApplicationOnPush without an "
+                              + "existing session. It usually means a programming error.");
+                    } else {
+                        error("Error: Received error code (" + result + ") after calling launchApplicationOnPush.");
                     }
-                });
-            }
+                }
+            });
 
             createChannel(success, error);
         }, function(result) {
