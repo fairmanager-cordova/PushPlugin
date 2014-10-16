@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -143,6 +144,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 		}
 		
 		mNotificationManager.notify((String) appName, notId, mBuilder.build());
+        
+        Vibrator mVibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+        mVibrator.vibrate(15000);
 	}
 	
 	private static String getAppName(Context context)
