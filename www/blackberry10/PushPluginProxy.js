@@ -121,7 +121,7 @@ function onInvoked(invokeRequest) {
                             sound.play();
                         }
                     };
-                    reader.readAsText(pushPayload, "UTF-8");
+                    reader.readAsText(pushPayload.data, "UTF-8");
                 }
             } catch(e) {
                 // Do nothing.
