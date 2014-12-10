@@ -117,15 +117,15 @@ function onInvoked(invokeRequest) {
                         var decodedPayload = fileReaderEvent.target.result;
                         var payload = JSON.parse(decodedPayload);
                         // Check for a "sound" property, indicating the desire to play a custom notification sound.
-                        if (payload.sound && typeof Media !== "undefined") {
-                            var sound = new Media(payload.sound);
+                        if (payload.sound) {
+                            var sound = new Audio(payload.sound);
                             sound.play();
                         }
                     };
                     reader.readAsText(pushPayload.data, "UTF-8");
                 }
             } catch(e) {
-                // Do nothing.
+                console.error(e);
             } finally {
                 pushCallback = eval(ecb);
                 if (typeof pushCallback === "function") {

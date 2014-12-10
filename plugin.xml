@@ -129,6 +129,7 @@
 
     <!-- blackberry10 -->
     <platform name="blackberry10">
+        <dependency id="com.blackberry.app" />
         <dependency id="com.blackberry.push" />
         <dependency id="com.blackberry.invoked" />
         <config-file target="www/config.xml" parent="/widget">
