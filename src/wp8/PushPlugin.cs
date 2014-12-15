@@ -28,7 +28,14 @@ namespace WPCordovaClassLib.Cordova.Commands
             var pushChannel = HttpNotificationChannel.Find(this.pushOptions.ChannelName);
             if (pushChannel == null)
             {
-                pushChannel = new HttpNotificationChannel(this.pushOptions.ChannelName);
+                if (!string.IsNullOrEmpty(this.pushOptions.ServiceName))
+                {
+                    pushChannel = new HttpNotificationChannel(this.pushOptions.ChannelName, this.pushOptions.ServiceName);
+                } 
+                else 
+                {
+                    pushChannel = new HttpNotificationChannel(this.pushOptions.ChannelName);
+                }
 
                 try
                 {
@@ -202,6 +209,9 @@ namespace WPCordovaClassLib.Cordova.Commands
         {
             [DataMember(Name = "channelName", IsRequired = true)]
             public string ChannelName { get; set; }
+            
+            [DataMember(Name = "serviceName", IsRequired = false)]
+            public string ServiceName { get; set; }
 
             [DataMember(Name = "ecb", IsRequired = false)]
             public string NotificationCallback { get; set; }
