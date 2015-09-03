@@ -72,6 +72,10 @@ namespace WPCordovaClassLib.Cordova.Commands
                     pushNotification.Type = "toast";
                     pushNotification.JsonContent.Add("innerText", e.ToastNotification.Content.InnerText);
                     break;
+                case PushNotificationType.Raw:
+                    pushNotification.Type = "raw";
+                    pushNotification.JsonContent.Add("innerText", e.RawNotification.Content);
+                    break;
                 default:
                     // Do nothing
                     return;

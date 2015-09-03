@@ -6,3 +6,4 @@ This fork maintains the following changes:
 - [blackberry10]: Allow sound to be played when receiving push notification
 - [ios]: Extended vibration when receiving push notification
 - [wp8]: Support for authenticated notification channels
+- [wp8]: WNS Push Notification Support (replaces MPNS)
