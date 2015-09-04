@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -70,7 +70,8 @@ namespace WPCordovaClassLib.Cordova.Commands
                     break;
                 case PushNotificationType.Toast:
                     pushNotification.Type = "toast";
-                    pushNotification.JsonContent.Add("innerText", e.ToastNotification.Content.InnerText);
+                    pushNotification.JsonContent.Add("message", e.ToastNotification.Content.SelectSingleNode("//text[@id='2']").InnerText);
+                    pushNotification.JsonContent.Add("param", e.ToastNotification.Content.SelectSingleNode("/toast/@launch").NodeValue);
                     break;
                 case PushNotificationType.Raw:
                     pushNotification.Type = "raw";
