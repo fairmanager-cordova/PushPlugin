@@ -71,7 +71,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                 case PushNotificationType.Toast:
                     pushNotification.Type = "toast";
                     pushNotification.JsonContent.Add("message", e.ToastNotification.Content.SelectSingleNode("//text[@id='2']").InnerText);
-                    pushNotification.JsonContent.Add("param", e.ToastNotification.Content.SelectSingleNode("/toast/@launch").NodeValue);
+                    pushNotification.JsonContent.Add("param", e.ToastNotification.Content.SelectSingleNode("//text[@id='3']").InnerText);
                     break;
                 case PushNotificationType.Raw:
                     pushNotification.Type = "raw";
