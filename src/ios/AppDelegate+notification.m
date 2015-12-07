@@ -134,6 +134,8 @@ static char launchNotificationKey;
         self.launchNotification = nil;
         [pushHandler performSelectorOnMainThread:@selector(notificationReceived) withObject:pushHandler waitUntilDone:NO];
     }
+
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 // The accessors use an Associative Reference since you can't define a iVar in a category
