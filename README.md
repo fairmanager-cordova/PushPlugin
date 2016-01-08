@@ -7,3 +7,4 @@ This fork maintains the following changes:
 - [ios]: Extended vibration when receiving push notification
 - [wp8]: Support for authenticated notification channels
 - [wp8]: WNS Push Notification Support (replaces MPNS)
+- [windows]: Supports windows universal platform
