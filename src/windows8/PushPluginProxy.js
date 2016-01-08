@@ -2,7 +2,10 @@
 module.exports = {
     register: function (success, fail, args) {
         try {
-            var onNotificationReceived = window[args[0].ecb];
+            var onNotificationReceived = function (e) {
+                window[args[0].ecb](e);
+                e.cancel = true;
+            };
 
             Windows.Networking.PushNotifications.PushNotificationChannelManager.createPushNotificationChannelForApplicationAsync().then(
                 function (channel) {
