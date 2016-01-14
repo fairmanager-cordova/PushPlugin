@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -109,7 +108,15 @@ public class GCMIntentService extends GCMBaseIntentService {
 				.setContentTitle(extras.getString("title"))
 				.setTicker(extras.getString("title"))
 				.setContentIntent(contentIntent)
-				.setAutoCancel(true);
+				.setAutoCancel(true)
+				.setVibrate(new long[]
+					{
+						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
+						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
+						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000
+					}
+				);
+
 
 		String message = extras.getString("message");
 		if (message != null) {
@@ -144,9 +151,6 @@ public class GCMIntentService extends GCMBaseIntentService {
 		}
 		
 		mNotificationManager.notify((String) appName, notId, mBuilder.build());
-        
-        Vibrator mVibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-        mVibrator.vibrate(15000);
 	}
 	
 	private static String getAppName(Context context)
