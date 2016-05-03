@@ -108,14 +108,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 				.setContentTitle(extras.getString("title"))
 				.setTicker(extras.getString("title"))
 				.setContentIntent(contentIntent)
-				.setAutoCancel(true)
-				.setVibrate(new long[]
-					{
-						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
-						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
-						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000
-					}
-				);
+				.setAutoCancel(true);
 
 
 		String message = extras.getString("message");
@@ -136,6 +129,15 @@ public class GCMIntentService extends GCMBaseIntentService {
 			int resourceId = r.getIdentifier(soundName, "raw", context.getPackageName());
 			Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resourceId);
 			mBuilder.setSound(soundUri);
+			
+			mBuilder
+				.setVibrate(new long[]
+					{
+						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
+						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
+						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000
+					}
+				);
 		}
 		
 		int notId = 0;
