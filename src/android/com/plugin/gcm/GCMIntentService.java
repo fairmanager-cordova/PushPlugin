@@ -136,6 +136,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 			int resourceId = r.getIdentifier(soundName, "raw", context.getPackageName());
 			Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resourceId);
 			mBuilder.setSound(soundUri);
+			
+			Vibrator mVibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+			mVibrator.vibrate(15000);
 		}
 		
 		int notId = 0;
