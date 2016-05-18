@@ -95,7 +95,7 @@ static char launchNotificationKey;
         for (int i = 1; i <= 15; i++) {
             UILocalNotification *notification = [UILocalNotification new];
 
-            notification.fireDate  = [NSDate dateWithTimeIntervalSinceNow:i];
+            notification.fireDate  = [NSDate dateWithTimeIntervalSinceNow:i*2];
             notification.timeZone  = [NSTimeZone defaultTimeZone];
             notification.soundName = @"silence.aiff";
             notification.userInfo  = @{kFMAdditionalLocalNotification: @(i)};
