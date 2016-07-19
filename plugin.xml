@@ -152,8 +152,8 @@
     </platform>
 
   <!-- windows8 -->
-  <platform name="windows8">
-    <js-module src="src/windows8/PushPluginProxy.js" name="PushPlugin">
+  <platform name="windows">
+    <js-module src="src/windows/PushPluginProxy.js" name="PushPlugin">
       <merges target="" />
     </js-module>
   </platform>
