@@ -219,10 +219,10 @@
 
         NSString * jsCallBack = [NSString stringWithFormat:@"%@(%@);", self.callback, jsonStr];
         
-		// http://stackoverflow.com/a/34901862/5159481
-		if ([self.webView isKindOfClass:[UIWebView class]]) {
-			[(UIWebView*)self.webView stringByEvaluatingJavaScriptFromString:jsCallBack];
-		}
+        // http://stackoverflow.com/a/34901862/5159481
+        if ([self.webView isKindOfClass:[UIWebView class]]) {
+            [(UIWebView*)self.webView stringByEvaluatingJavaScriptFromString:jsCallBack];
+        }
 
         self.notificationMessage = nil;
     }
