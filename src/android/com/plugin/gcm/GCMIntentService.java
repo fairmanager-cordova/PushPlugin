@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.provider.Settings;
 
 import com.google.android.gcm.GCMBaseIntentService;
 
@@ -124,20 +125,25 @@ public class GCMIntentService extends GCMBaseIntentService {
 		}
 		
 		String soundName = extras.getString("sound");
+
 		if (soundName != null) {
-			Resources r = getResources();
-			int resourceId = r.getIdentifier(soundName, "raw", context.getPackageName());
-			Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resourceId);
-			mBuilder.setSound(soundUri);
-			
-			mBuilder
-				.setVibrate(new long[]
-					{
-						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
-						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
-						0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000
-					}
-				);
+			if(soundName.equals("default")){
+				mBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+			}else{
+				Resources r = getResources();
+				int resourceId = r.getIdentifier(soundName, "raw", context.getPackageName());
+				Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resourceId);
+				mBuilder.setSound(soundUri);
+
+				mBuilder
+					.setVibrate(new long[]
+						{
+							0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
+							0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
+							0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000
+						}
+					);
+			}
 		}
 		
 		int notId = 0;
