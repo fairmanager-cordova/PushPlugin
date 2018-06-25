@@ -1,14 +1,14 @@
 {
-	"name": "phonegap-plugin-push",
+	"name": "@fairmanager/cordova-plugin-push",
 	"description": "Register and receive push notifications.",
-	"version": "2.5.0",
-	"homepage": "https://github.com/fairmanager-cordova/PushPlugin",
+	"version": "3.0.0",
+	"homepage": "https://github.com/fairmanager-cordova/plugin-push",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/fairmanager-cordova/PushPlugin.git"
+		"url": "git://github.com/fairmanager-cordova/plugin-push.git"
 	},
 	"cordova": {
-		"id": "phonegap-plugin-push",
+		"id": "@fairmanager/cordova-plugin-push",
 		"platforms": [
 			"ios",
 			"android",
@@ -26,6 +26,6 @@
 		"cordova-wp8",
 		"cordova-browser"
 	],
-	"author": "Adobe PhoneGap Team",
+	"author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
 	"license": "MIT"
 }
