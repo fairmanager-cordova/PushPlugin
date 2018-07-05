@@ -1,7 +1,7 @@
 {
   "name": "@fairmanager/cordova-plugin-push",
   "description": "Provides services related to push notifications to the FairManager mobile app.",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "homepage": "https://github.com/fairmanager-cordova/plugin-push",
   "repository": {
     "type": "git",
