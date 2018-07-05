@@ -1,5 +1,4 @@
-var PushNotification = function() {
-};
+var PushNotification = function() {};
 
 // Call this to register for push notifications. Content of [options] depends on whether we are working with APNS (iOS) or GCM (Android)
 PushNotification.prototype.register = function( successCallback, errorCallback, options ) {
@@ -39,14 +38,16 @@ PushNotification.prototype.unregister = function( successCallback, errorCallback
 	require( "cordova/exec" )( successCallback, errorCallback, "PushPlugin", "unregister", [ options ] );
 };
 
-    // Call this if you want to show toast notification on WP8
-    PushNotification.prototype.showToastNotification = function (successCallback, errorCallback, options) {
-        if (errorCallback == null) { errorCallback = function () { } }
+// Call this if you want to show toast notification on WP8
+PushNotification.prototype.showToastNotification = function( successCallback, errorCallback, options ) {
+	if( errorCallback == null ) {
+		errorCallback = function() {}
+	}
 
-        if (typeof errorCallback != "function") {
-            console.log("PushNotification.register failure: failure parameter not a function");
-            return
-        }
+	if( typeof errorCallback != "function" ) {
+		console.log( "PushNotification.register failure: failure parameter not a function" );
+		return
+	}
 
 	require( "cordova/exec" )( successCallback, errorCallback, "PushPlugin", "showToastNotification", [ options ] );
 }
@@ -73,13 +74,13 @@ PushNotification.prototype.setApplicationIconBadgeNumber = function( successCall
 
 //-------------------------------------------------------------------
 
-if(!window.plugins) {
-    window.plugins = {};
+if( !window.plugins ) {
+	window.plugins = {};
 }
-if (!window.plugins.pushNotification) {
-    window.plugins.pushNotification = new PushNotification();
+if( !window.plugins.pushNotification ) {
+	window.plugins.pushNotification = new PushNotification();
 }
 
-if (typeof module != 'undefined' && module.exports) {
-  module.exports = PushNotification;
+if( typeof module != 'undefined' && module.exports ) {
+	module.exports = PushNotification;
 }
