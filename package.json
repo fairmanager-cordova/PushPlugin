@@ -1,31 +1,31 @@
 {
-	"name": "@fairmanager/cordova-plugin-push",
-	"description": "Register and receive push notifications.",
-	"version": "3.0.0",
-	"homepage": "https://github.com/fairmanager-cordova/plugin-push",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/fairmanager-cordova/plugin-push.git"
-	},
-	"cordova": {
-		"id": "@fairmanager/cordova-plugin-push",
-		"platforms": [
-			"ios",
-			"android",
-			"windows",
-			"browser"
-		]
-	},
-	"keywords": [
-		"ecosystem:cordova",
-		"ecosystem:phonegap",
-		"cordova-ios",
-		"cordova-android",
-		"cordova-windows8",
-		"cordova-windows",
-		"cordova-wp8",
-		"cordova-browser"
-	],
-	"author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
-	"license": "MIT"
+  "name": "@fairmanager/cordova-plugin-push",
+  "description": "Register and receive push notifications.",
+  "version": "4.0.0",
+  "homepage": "https://github.com/fairmanager-cordova/plugin-push",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fairmanager-cordova/plugin-push.git"
+  },
+  "cordova": {
+    "id": "@fairmanager/cordova-plugin-push",
+    "platforms": [
+      "ios",
+      "android",
+      "windows",
+      "browser"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "ecosystem:phonegap",
+    "cordova-ios",
+    "cordova-android",
+    "cordova-windows8",
+    "cordova-windows",
+    "cordova-wp8",
+    "cordova-browser"
+  ],
+  "author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
+  "license": "MIT"
 }
