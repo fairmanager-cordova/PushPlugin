@@ -1,5 +1,5 @@
-plugin-push
-===========
+fairmanager-cordova-plugin-push
+===============================
 
 Provides services related to push notifications to the FairManager mobile app.
 

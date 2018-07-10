@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
-	xmlns:rim="http://www.blackberry.com/ns/widgets" id="@fairmanager/cordova-plugin-push" version="4.0.1">
+	xmlns:rim="http://www.blackberry.com/ns/widgets" id="fairmanager-cordova-plugin-push" version="4.0.1">
 
 	<name>PushPlugin</name>
 	<author>Oliver Salzburg</author>
@@ -60,6 +60,18 @@
 			<feature name="PushPlugin">
 				<param name="ios-package" value="PushPlugin"/>
 			</feature>
+		</config-file>
+
+		<config-file target="*-Info.plist" parent="UIBackgroundModes">
+			<array>
+				<string>remote-notification</string>
+			</array>
+		</config-file>
+		<config-file target="*-Debug.plist" parent="aps-environment">
+			<string>development</string>
+		</config-file>
+		<config-file target="*-Release.plist" parent="aps-environment">
+			<string>production</string>
 		</config-file>
 
 		<source-file src="src/ios/AppDelegate+notification.m" />
