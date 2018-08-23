@@ -27,5 +27,8 @@
     "cordova-browser"
   ],
   "author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
 }
