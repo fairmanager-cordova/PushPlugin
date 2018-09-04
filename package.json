@@ -1,7 +1,7 @@
 {
   "name": "fairmanager-cordova-plugin-push",
   "description": "Provides services related to push notifications to the FairManager mobile app.",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "homepage": "https://github.com/fairmanager-cordova/plugin-push",
   "repository": {
     "type": "git",
@@ -27,5 +27,12 @@
     "cordova-browser"
   ],
   "author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
-  "license": "MIT"
+  "devDependencies": {
+    "eslint": "4.12.0",
+    "eslint-plugin-promise": "3.6.0"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
 }

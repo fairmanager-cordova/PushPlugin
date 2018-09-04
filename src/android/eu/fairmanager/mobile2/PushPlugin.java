@@ -141,7 +141,7 @@ public class PushPlugin extends CordovaPlugin {
 		Log.v(TAG, "sendJavascript: " + _d);
 
 		if (callbackNameEvent != null && gWebView != null) {
-			((SystemWebView) gWebView.getView()).evaluateJavascript(_d, null);
+			gWebView.getView().post(() -> ((SystemWebView)gWebView.getView()).evaluateJavascript(_d, null));
 		}
 	}
 
