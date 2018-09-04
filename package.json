@@ -27,6 +27,10 @@
     "cordova-browser"
   ],
   "author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
+  "devDependencies": {
+    "eslint": "4.12.0",
+    "eslint-plugin-promise": "3.6.0"
+  },
   "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
