@@ -1,29 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
-	xmlns:rim="http://www.blackberry.com/ns/widgets" id="fairmanager-cordova-plugin-push" version="4.1.0">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<plugin id="fairmanager-cordova-plugin-push" version="4.1.0"
+	xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<name>PushPlugin</name>
-	<author>Oliver Salzburg</author>
-
+	<name>Push Plugin</name>
 	<description>Provides services related to push notifications to the FairManager mobile app.</description>
-
 	<license>MIT</license>
+	<author>Oliver Salzburg</author>
+	<keywords>push</keywords>
 
-	<js-module src="www/PushNotification.js" name="PushNotification">
-		<clobbers target="PushNotification" />
-	</js-module>
+	<repo>https://github.com/fairmanager-cordova/plugin-push</repo>
+	<issue>https://github.com/fairmanager-cordova/plugin-push/issues</issue>
 
 	<engines>
-		<engine name="cordova" version=">=7.0.0" />
+		<engine name="cordova" version=">=8.0.0"/>
+		<engine name="cordova-android" version=">=7.1.1"/>
+		<engine name="cordova-ios" version=">=4.5.5"/>
 	</engines>
 
-	<!-- android -->
+	<js-module src="www/push.js" name="Push">
+		<clobbers target="cordova.plugins.Push" />
+	</js-module>
+
 	<platform name="android">
 		<config-file target="res/xml/config.xml" parent="/*">
-			<feature name="PushPlugin">
-				<param name="android-package" value="eu.fairmanager.mobile2.PushPlugin"/>
+			<feature name="Push">
+				<param name="android-package" value="eu.fairmanager.plugins.Push"/>
 			</feature>
 		</config-file>
 
@@ -43,9 +45,9 @@
 			</service>
 		</config-file>
 
-		<source-file src="src/android/eu/fairmanager/mobile2/ListenerService.java" target-dir="src/eu/fairmanager/mobile2" />
-		<source-file src="src/android/eu/fairmanager/mobile2/PushHandlerActivity.java" target-dir="src/eu/fairmanager/mobile2" />
-		<source-file src="src/android/eu/fairmanager/mobile2/PushPlugin.java" target-dir="src/eu/fairmanager/mobile2" />
+		<source-file src="src/android/eu/fairmanager/plugins/push/ListenerService.java" target-dir="src/eu/fairmanager/plugins/push/" />
+		<source-file src="src/android/eu/fairmanager/plugins/push/PushHandlerActivity.java" target-dir="src/eu/fairmanager/plugins/push/" />
+		<source-file src="src/android/eu/fairmanager/plugins/push/PushPlugin.java" target-dir="src/eu/fairmanager/plugins/push/" />
 
 		<framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
 
@@ -54,11 +56,10 @@
 		<framework src="com.google.gms:google-services:+" />
 	</platform>
 
-	<!-- ios -->
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
-			<feature name="PushPlugin">
-				<param name="ios-package" value="PushPlugin"/>
+			<feature name="Push">
+				<param name="ios-package" value="CDVPush"/>
 			</feature>
 		</config-file>
 
@@ -81,11 +82,9 @@
 		<header-file src="src/ios/PushPlugin.h" />
 	</platform>
 
-	<!-- windows8 -->
 	<platform name="windows">
 		<js-module src="src/windows/PushPluginProxy.js" name="PushPlugin">
 			<merges target="" />
 		</js-module>
 	</platform>
-
 </plugin>

@@ -1,21 +1,9 @@
 {
   "name": "fairmanager-cordova-plugin-push",
-  "description": "Provides services related to push notifications to the FairManager mobile app.",
   "version": "4.1.0",
-  "homepage": "https://github.com/fairmanager-cordova/plugin-push",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/fairmanager-cordova/plugin-push.git"
-  },
-  "cordova": {
-    "id": "fairmanager-cordova-plugin-push",
-    "platforms": [
-      "ios",
-      "android",
-      "windows",
-      "browser"
-    ]
-  },
+  "description": "Provides services related to push notifications to the FairManager mobile app.",
+  "license": "MIT",
+  "author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
   "keywords": [
     "ecosystem:cordova",
     "ecosystem:phonegap",
@@ -26,12 +14,26 @@
     "cordova-wp8",
     "cordova-browser"
   ],
-  "author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
+  "homepage": "https://github.com/fairmanager-cordova/plugin-push",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fairmanager-cordova/plugin-push.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fairmanager-cordova/plugin-push/issues"
+  },
+  "cordova": {
+    "id": "fairmanager-cordova-plugin-push",
+    "platforms": [
+      "android",
+      "ios",
+      "windows"
+    ]
+  },
   "devDependencies": {
     "eslint": "4.12.0",
     "eslint-plugin-promise": "3.6.0"
   },
-  "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }
