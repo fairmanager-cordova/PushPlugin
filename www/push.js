@@ -76,5 +76,5 @@ Push.prototype.setApplicationIconBadgeNumber = function( successCallback, errorC
 //-------------------------------------------------------------------
 
 if( typeof module != 'undefined' && module.exports ) {
-	module.exports = Push;
+	module.exports = new Push();
 }
