@@ -1,4 +1,4 @@
-package eu.fairmanager.mobile2;
+package eu.fairmanager.plugins.push;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
