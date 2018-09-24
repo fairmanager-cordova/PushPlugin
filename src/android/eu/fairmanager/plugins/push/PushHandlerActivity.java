@@ -23,21 +23,21 @@ public class PushHandlerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "onCreate");
 
-		boolean isPushPluginActive = PushPlugin.isActive();
-		processPushBundle(isPushPluginActive);
+		boolean isPushActive = Push.isActive();
+		processPushBundle(isPushActive);
 
 		finish();
 
-		if (!isPushPluginActive) {
+		if (!isPushActive) {
 			forceMainActivityReload();
 		}
 	}
 
 	/**
 	 * Takes the pushBundle extras from the intent,
-	 * and sends it through to the PushPlugin for processing.
+	 * and sends it through to the Push for processing.
 	 */
-	private void processPushBundle(boolean isPushPluginActive) {
+	private void processPushBundle(boolean isPushActive) {
 		Log.v(TAG, "processPushBundle");
 
 		Intent intent = getIntent();
@@ -53,7 +53,7 @@ public class PushHandlerActivity extends Activity {
 			}
 
 			originalExtras.putBoolean("foreground", false);
-			originalExtras.putBoolean("coldstart", !isPushPluginActive);
+			originalExtras.putBoolean("coldstart", !isPushActive);
 
 			// Check if there is already a reply that was entered in-line in the notification.
 			Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
@@ -64,7 +64,7 @@ public class PushHandlerActivity extends Activity {
 
 			// Send the data to the JS side. It will be processed like a push notification would
 			// be received while the application is active.
-			PushPlugin.sendExtras(originalExtras);
+			Push.sendExtras(originalExtras);
 		}
 	}
 

@@ -36,9 +36,9 @@ public class ListenerService extends FirebaseMessagingService {
 		}
 
 		// If we are in the foreground, just surface the payload, else post it to the statusbar
-		if (PushPlugin.isInForeground()) {
+		if (Push.isInForeground()) {
 			extras.putBoolean("foreground", true);
-			PushPlugin.sendExtras(extras);
+			Push.sendExtras(extras);
 		} else {
 			extras.putBoolean("foreground", false);
 
@@ -62,7 +62,7 @@ public class ListenerService extends FirebaseMessagingService {
 
 			// Send this JSON data to the JavaScript application above EVENT should be set to the msg type
 			// In this case this is the registration ID
-			PushPlugin.sendJavascript(json);
+			Push.sendJavascript(json);
 
 		} catch (JSONException e) {
 			// No message to the user is sent, JSON failed
