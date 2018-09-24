@@ -1,6 +1,6 @@
 {
   "name": "fairmanager-cordova-plugin-push",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Provides services related to push notifications to the FairManager mobile app.",
   "license": "MIT",
   "author": "Oliver Salzburg <oliver.salzburg@gmail.com>",
