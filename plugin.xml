@@ -83,7 +83,7 @@
 	</platform>
 
 	<platform name="windows">
-		<js-module src="src/windows/PushPluginProxy.js" name="PushPlugin">
+		<js-module src="src/windows/PushProxy.js" name="Push">
 			<merges target="" />
 		</js-module>
 	</platform>
