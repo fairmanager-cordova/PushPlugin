@@ -25,7 +25,7 @@
 	<platform name="android">
 		<config-file target="res/xml/config.xml" parent="/*">
 			<feature name="Push">
-				<param name="android-package" value="eu.fairmanager.plugins.Push"/>
+				<param name="android-package" value="eu.fairmanager.plugins.push.Push"/>
 			</feature>
 		</config-file>
 
@@ -36,8 +36,8 @@
 		</config-file>
 
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
-			<activity android:name="eu.fairmanager.mobile2.PushHandlerActivity" android:exported="true"/>
-			<service android:name="eu.fairmanager.mobile2.ListenerService">
+			<activity android:name="eu.fairmanager.plugins.push.PushHandlerActivity" android:exported="true"/>
+			<service android:name="eu.fairmanager.plugins.push.ListenerService">
 				<intent-filter>
 					<action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
 					<action android:name="com.google.firebase.MESSAGING_EVENT" />
