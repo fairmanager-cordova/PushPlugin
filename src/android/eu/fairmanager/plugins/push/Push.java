@@ -35,8 +35,8 @@ import java.util.Iterator;
  * @author awysocki
  */
 
-public class PushPlugin extends CordovaPlugin {
-	public static final String TAG = "PushPlugin";
+public class Push extends CordovaPlugin {
+	public static final String TAG = "Push";
 
 	private static CordovaWebView gWebView;
 	private static String callbackNameEvent;
@@ -85,7 +85,7 @@ public class PushPlugin extends CordovaPlugin {
 
 							// Send this JSON data to the JavaScript application above EVENT should be set to the msg type
 							// In this case this is the registration ID
-							PushPlugin.sendJavascript(json);
+							Push.sendJavascript(json);
 
 							callbackContext.success(token);
 

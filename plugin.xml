@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<plugin id="fairmanager-cordova-plugin-push" version="4.2.1"
+<plugin id="fairmanager-cordova-plugin-push" version="4.2.2"
 	xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -47,7 +47,7 @@
 
 		<source-file src="src/android/eu/fairmanager/plugins/push/ListenerService.java" target-dir="src/eu/fairmanager/plugins/push/" />
 		<source-file src="src/android/eu/fairmanager/plugins/push/PushHandlerActivity.java" target-dir="src/eu/fairmanager/plugins/push/" />
-		<source-file src="src/android/eu/fairmanager/plugins/push/PushPlugin.java" target-dir="src/eu/fairmanager/plugins/push/" />
+		<source-file src="src/android/eu/fairmanager/plugins/push/Push.java" target-dir="src/eu/fairmanager/plugins/push/" />
 
 		<framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
 
@@ -59,7 +59,7 @@
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
 			<feature name="Push">
-				<param name="ios-package" value="CDVPush"/>
+				<param name="ios-package" value="FMPush"/>
 			</feature>
 		</config-file>
 
@@ -75,11 +75,11 @@
 			<string>production</string>
 		</config-file>
 
-		<source-file src="src/ios/AppDelegate+notification.m" />
-		<source-file src="src/ios/PushPlugin.m" />
+		<header-file src="src/ios/FMPush.h" />
+		<source-file src="src/ios/FMPush.m" />
 
 		<header-file src="src/ios/AppDelegate+notification.h" />
-		<header-file src="src/ios/PushPlugin.h" />
+		<source-file src="src/ios/AppDelegate+notification.m" />
 	</platform>
 
 	<platform name="windows">

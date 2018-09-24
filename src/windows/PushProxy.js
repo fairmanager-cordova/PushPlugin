@@ -17,4 +17,4 @@ module.exports = {
         }
     }
 };
-require("cordova/exec/proxy").add("PushPlugin", module.exports);
+require("cordova/exec/proxy").add("Push", module.exports);
