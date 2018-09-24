@@ -16,7 +16,7 @@ PushNotification.prototype.register = function( successCallback, errorCallback, 
 		return
 	}
 
-	require( "cordova/exec" )( successCallback, errorCallback, "PushPlugin", "register", [ options ] );
+	require( "cordova/exec" )( successCallback, errorCallback, "Push", "register", [ options ] );
 };
 
 // Call this to unregister for push notifications
@@ -35,7 +35,7 @@ PushNotification.prototype.unregister = function( successCallback, errorCallback
 		return
 	}
 
-	require( "cordova/exec" )( successCallback, errorCallback, "PushPlugin", "unregister", [ options ] );
+	require( "cordova/exec" )( successCallback, errorCallback, "Push", "unregister", [ options ] );
 };
 
 // Call this if you want to show toast notification on WP8
@@ -49,7 +49,7 @@ PushNotification.prototype.showToastNotification = function( successCallback, er
 		return
 	}
 
-	require( "cordova/exec" )( successCallback, errorCallback, "PushPlugin", "showToastNotification", [ options ] );
+	require( "cordova/exec" )( successCallback, errorCallback, "Push", "showToastNotification", [ options ] );
 }
 // Call this to set the application icon badge
 PushNotification.prototype.setApplicationIconBadgeNumber = function( successCallback, errorCallback, badge ) {
@@ -67,7 +67,7 @@ PushNotification.prototype.setApplicationIconBadgeNumber = function( successCall
 		return
 	}
 
-	require( "cordova/exec" )( successCallback, errorCallback, "PushPlugin", "setApplicationIconBadgeNumber", [ {
+	require( "cordova/exec" )( successCallback, errorCallback, "Push", "setApplicationIconBadgeNumber", [ {
 		badge : badge
 	} ] );
 };
