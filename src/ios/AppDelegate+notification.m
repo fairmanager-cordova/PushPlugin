@@ -21,11 +21,11 @@ static char launchNotificationKey;
 // its dangerous to override a method from within a category.
 // Instead we will use method swizzling. we set this up in the load call.
 + (void)load {
-    Method original, swizzled;
+	Method original, swizzled;
 
-    original = class_getInstanceMethod(self, @selector(init));
-    swizzled = class_getInstanceMethod(self, @selector(swizzled_init));
-    method_exchangeImplementations(original, swizzled);
+	original = class_getInstanceMethod(self, @selector(init));
+	swizzled = class_getInstanceMethod(self, @selector(swizzled_init));
+	method_exchangeImplementations(original, swizzled);
 }
 
 - (AppDelegate*)swizzled_init {
@@ -47,12 +47,12 @@ static char launchNotificationKey;
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
-	FMPush* pushHandler = [self getCommandInstance:@"FMPush"];
+	FMPush* pushHandler = [self getCommandInstance:@"Push"];
 	[pushHandler didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
-	FMPush* pushHandler = [self getCommandInstance:@"FMPush"];
+	FMPush* pushHandler = [self getCommandInstance:@"Push"];
 	[pushHandler didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
@@ -66,7 +66,7 @@ static char launchNotificationKey;
 	}
 
 	if (appState == UIApplicationStateActive) {
-		FMPush* pushHandler = [self getCommandInstance:@"FMPush"];
+		FMPush* pushHandler = [self getCommandInstance:@"Push"];
 		pushHandler.notificationMessage = userInfo;
 		pushHandler.isInline = YES;
 		[pushHandler notificationReceived];
@@ -86,7 +86,7 @@ static char launchNotificationKey;
 		NSLog(@"Received Remote Notification while being in background");
 
 		// setup additional local notifications for the push notification
-		for (int i = 1; i <= 15; i++) {
+		for( int i = 1; i <= 15; i++ ) {
 			UILocalNotification *notification = [UILocalNotification new];
 
 			notification.fireDate  = [NSDate dateWithTimeIntervalSinceNow:i*2];
@@ -121,7 +121,7 @@ static char launchNotificationKey;
 	application.applicationIconBadgeNumber = 0;
 
 	if (self.launchNotification) {
-		FMPush* pushHandler = [self getCommandInstance:@"FMPush"];
+		FMPush* pushHandler = [self getCommandInstance:@"Push"];
 
 		pushHandler.notificationMessage = self.launchNotification;
 		self.launchNotification = nil;
