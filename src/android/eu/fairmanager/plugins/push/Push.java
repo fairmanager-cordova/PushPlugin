@@ -1,5 +1,8 @@
 package eu.fairmanager.plugins.push;
 
+// TODO: Drop this import and access the resources dynamically from the parent package.
+import eu.fairmanager.mobile2.R;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
