@@ -14,8 +14,8 @@ static char launchNotificationKey;
 
 @implementation AppDelegate (notification)
 
-- (id) getCommandInstance:(NSString*) className {
-	return [self.viewController getCommandInstance:className];
+- (id) getCommandInstance:(NSString*) pluginName {
+	return [self.viewController getCommandInstance:pluginName];
 }
 
 // its dangerous to override a method from within a category.
