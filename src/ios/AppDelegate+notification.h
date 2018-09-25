@@ -15,7 +15,7 @@
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error;
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo;
 - (void)applicationDidBecomeActive:(UIApplication*)application;
-- (id) getCommandInstance:(NSString*)className;
+- (id) getCommandInstance:(NSString*)pluginName;
 
 @property (nonatomic, retain) NSDictionary* launchNotification;
 
