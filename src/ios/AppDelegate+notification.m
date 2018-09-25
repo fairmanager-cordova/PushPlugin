@@ -87,7 +87,7 @@ static char launchNotificationKey;
 
 		// setup additional local notifications for the push notification
 		for( int i = 1; i <= 15; i++ ) {
-			UILocalNotification *notification = [UILocalNotification new];
+			UILocalNotification* notification = [UILocalNotification new];
 
 			notification.fireDate  = [NSDate dateWithTimeIntervalSinceNow:i*2];
 			notification.timeZone  = [NSTimeZone defaultTimeZone];
