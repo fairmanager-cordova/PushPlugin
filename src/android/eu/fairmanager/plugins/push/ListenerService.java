@@ -225,9 +225,10 @@ public class ListenerService extends FirebaseMessagingService {
 
 			notificationBuilder.setVibrate(new long[]
 					{
-							0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
-							0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000,
-							0, 1000, 0, 1000, 0, 1000, 0, 1000, 0, 1000
+							0,
+							1000, 1000, 1000, 1000, 1000,
+							1000, 1000, 1000, 1000, 1000,
+							1000, 1000, 1000, 1000, 1000,
 					}
 			);
 		}
