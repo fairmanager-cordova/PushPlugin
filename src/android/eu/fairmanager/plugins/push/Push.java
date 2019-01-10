@@ -1,5 +1,8 @@
 package eu.fairmanager.plugins.push;
 
+// TODO: Drop this import and access the resources dynamically from the parent package.
+import eu.fairmanager.mobile2.R;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -10,10 +13,8 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.android.gms.tasks.SuccessContinuation;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -22,14 +23,12 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.PluginResult;
 import org.apache.cordova.engine.SystemWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 /**
  * @author awysocki
@@ -165,22 +164,24 @@ public class Push extends CordovaPlugin {
 			return;
 		}
 
+		Context context = this.getApplicationContext();
+		Resources r = context.getResources();
+
 		NotificationManager mNotificationManager =
 				(NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
-		NotificationChannel channelMessages = new NotificationChannel("messages", "Messages", NotificationManager.IMPORTANCE_HIGH);
+		NotificationChannel channelMessages = new NotificationChannel("messages", r.getString(R.string.messages), NotificationManager.IMPORTANCE_HIGH);
 		channelMessages.enableLights(true);
 		channelMessages.setLightColor(Color.valueOf(0x00, 0x96, 0x88, 0xff).toArgb());
 		channelMessages.enableVibration(true);
 		channelMessages.setVibrationPattern(new long[]
 				{
-						0, 1000, 1000, 1000, 1000, 1000,
-						1000, 1000, 1000, 1000, 1000,
-						1000, 1000, 1000, 1000, 1000
+						0,
+						1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
+						1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
+						1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000
 				});
 		channelMessages.setShowBadge(true);
-		Context context = this.getApplicationContext();
-		Resources r = context.getResources();
 		int resourceId = r.getIdentifier("message", "raw", context.getPackageName());
 		Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resourceId);
 		channelMessages.setSound(soundUri, new AudioAttributes.Builder()
@@ -190,10 +191,24 @@ public class Push extends CordovaPlugin {
 				.build());
 		mNotificationManager.createNotificationChannel(channelMessages);
 
-		NotificationChannel channelReminder = new NotificationChannel("reminder", "Reminder", NotificationManager.IMPORTANCE_DEFAULT);
+		NotificationChannel channelBroadcast = new NotificationChannel("broadcast", r.getString(R.string.broadcasts), NotificationManager.IMPORTANCE_HIGH);
+		channelBroadcast.enableLights(true);
+		channelBroadcast.setLightColor(Color.valueOf(0x00, 0x96, 0x88, 0xff).toArgb());
+		channelBroadcast.enableVibration(true);
+		channelBroadcast.setVibrationPattern(new long[]
+				{
+						0,
+						1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
+						1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
+						1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000
+				});
+		channelBroadcast.setShowBadge(true);
+		mNotificationManager.createNotificationChannel(channelBroadcast);
+
+		NotificationChannel channelReminder = new NotificationChannel("reminder", r.getString(R.string.reminder), NotificationManager.IMPORTANCE_DEFAULT);
 		mNotificationManager.createNotificationChannel(channelReminder);
 
-		NotificationChannel channelUncategorized = new NotificationChannel("uncategorized", "Uncategorized", NotificationManager.IMPORTANCE_DEFAULT);
+		NotificationChannel channelUncategorized = new NotificationChannel("uncategorized", r.getString(R.string.uncategorized), NotificationManager.IMPORTANCE_DEFAULT);
 		mNotificationManager.createNotificationChannel(channelUncategorized);
 	}
 
